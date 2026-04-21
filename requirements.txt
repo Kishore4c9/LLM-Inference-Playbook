@@ -1,0 +1,8 @@
+huggingface_hub
+requests
+torch
+torchvision
+torchaudio 
+	--index-url https://download.pytorch.org/whl/cu121 
+transformers
+accelerate
