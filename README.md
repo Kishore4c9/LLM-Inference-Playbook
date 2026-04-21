@@ -42,13 +42,18 @@ Demonstrates minimal LLM inference using Hugging Face’s serverless Inference A
 <p align="center">
   <img src="files/01-Basic.gif" width="800px">
 </p>
+▶️ Execution
+   
+    python ./src/01-Basics.py
+
 
 ### [02-Basic_Pro.py](./src/02-Basic_Pro.py) 
 - Enhanced LLM inference with streaming responses. Intended to make the response/UX realtime. 
+<!--
 <p align="center">
   <img src="files/02-BasicPro.gif" width="800px">
 </p>
-
+-->
 
 ### [03-Chat_History.py](./src/03-Chat_History.py)
 - Demonstrates stateful LLM interaction by maintaining chat history across turns, enabling multi-turn conversations with contextual continuity.
@@ -56,5 +61,41 @@ Demonstrates minimal LLM inference using Hugging Face’s serverless Inference A
   <img src="files/03-Chat_History.gif" width="800px">
 </p>
 
+---
+# Advanced Concept (KV_Caching)
 
+### [chat_kv_cache.py](./KV_Caching/src/chat_kv_cache.py): 
+- Implements chat-based LLM inference using **KV caching**, where the model stores **token-level key/value states (not raw text)** from previous turns.
+- This avoids recomputing attention over the full history, leading to **lower latency, reduced compute cost, and improved throughput** in multi-turn conversations.
 
+### 🔄 KV Cache Flow
+   ```bash
+   Text → Tokens → Transformer (K, V states) → KV Cache  
+                                            ↓  
+                            Next Token Generation (reuse KV)
+  ```
+
+**Key idea:** Cache grows with tokens, enabling fast incremental decoding without reprocessing past context.
+
+▶️ Execution
+   
+    python ./KV_Caching/main.py
+  
+---
+## 🛠 Setup and Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Kishore4c9/LLM-Inference-Playbook.git](https://github.com/Kishore4c9/LLM-Inference-Playbook.git)
+   cd LLM-Inference-Playbook
+
+2. **Environment:**
+ Create Virtual Env
+   ```bash
+   $ python3 -m venv .venv
+   $ source .venv/bin/activate
+3. Install requirements.txt
+   ```bash
+   $ pip install -r requirements.txt
+
+---
